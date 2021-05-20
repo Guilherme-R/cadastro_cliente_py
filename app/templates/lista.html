@@ -1,0 +1,36 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<div class=" table-responsive mt-4">
+    <table class=" table">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">Logradouro</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Estado</th>
+          <th scope="col">CEP</th>
+        </tr>
+      </thead>
+      <tbody>
+
+          {% if usuarios %}
+            {% for indice, email in enumerate(usuarios): %}
+              <tr>
+                <td>{{ indice + 1 }}</td>
+                <td>{{ usuarios[email].nome }}</td>
+                <td>{{ usuarios[email].email }}</td>
+                <td>{{ usuarios[email].endereco.logradouro }}</td>
+                <td>{{ usuarios[email].endereco.cidade }}</td>
+                <td>{{ usuarios[email].endereco.estado }}</td>
+                <td>{{ usuarios[email].endereco.cep }}</td>
+              </tr>
+            {% endfor %}
+          {% endif %}
+
+      </tbody>
+    </table>
+</div>
+{% endblock %}

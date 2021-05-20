@@ -1,0 +1,10 @@
+body {
+    background-image: url(../img/background.png);
+    backgroud-repeat: no-repeat;
+    background-size: cover;
+    backgroud-position: center center;
+}
+
+#divPrincipal{
+    background-color: whitesmoke;
+}

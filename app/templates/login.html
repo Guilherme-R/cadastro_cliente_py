@@ -1,0 +1,18 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+  <form method="POST" action="{{ url_for('autenticar') }}" class="row g-3 mb-3 mt-3 ms-3 me-3">
+    <input type="hidden" name="proxima" value="{{ proxima or url_for('index') }}">
+    <div class="mb-3">
+      <label for="inputEmail" class="form-label">Email</label>
+      <input type="email" class="form-control" id="inputEmail" name="email">
+      <div id="emailHelp" class="form-text">Nunca compartilharemos seu e-mail com outras pessoas.</div>
+    </div>
+    <div class="mb-3">
+      <label for="inputSenha" class="form-label">Senha</label>
+      <input type="password" class="form-control" id="inputSenha" name="senha">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+{% endblock %}

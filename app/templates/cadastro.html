@@ -1,0 +1,43 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+
+  <form method="POST" action="{{ url_for('criar') }}" class="row g-3 mb-3 mt-3 ms-3 me-3">
+    <div class="col-12">
+      <label for="inputNome" class="form-label">Nome Completo</label>
+      <input name="nome" type="text" class="form-control" id="inputNome" placeholder="Nome e Sobrenome">
+    </div>
+    <div class="col-md-6">
+      <label for="inputEmail" class="form-label">Email</label>
+      <input name="email" type="email" class="form-control" id="inputEmail" placeholder="exemplo@gmail.com.br">
+    </div>
+    <div class="col-md-6">
+      <label for="inputSenha" class="form-label">Senha</label>
+      <input name="senha" type="password" class="form-control" id="inputSenha">
+    </div>
+    <div class="col-12">
+      <label for="inputLogradouro" class="form-label">Logradouro</label>
+      <input name="logradouro" type="text" class="form-control" id="inputLogradouro" placeholder="Rua Maria, 1234 - Jardins">
+    </div>
+    <div class="col-md-6">
+      <label for="inputCidade" class="form-label">Cidade</label>
+      <input name="cidade" type="text" class="form-control" id="inputCidade">
+    </div>
+    <div class="col-md-4">
+      <label for="inputEstado" class="form-label">Estado</label>
+      <select name="estado" id="inputEstado" class="form-select">
+        {% for estado in estados %}
+        <option>{{ estado }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label for="inputCep" class="form-label">CEP</label>
+      <input name="cep" type="text" class="form-control" id="inputCep" placeholder="00000-000">
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary mb-3">Confirmar</button>
+    </div>
+  </form>
+
+{% endblock %}
