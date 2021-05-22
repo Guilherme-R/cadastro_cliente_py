@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, flash, url_for, make_response, jsonify
 from entities.Usuario import Usuario
 from entities.Endereco import Endereco
 from entities.Estados import estados
+import requests
 
 app= Flask(__name__)
 app.secret_key = 'amoeba'
@@ -66,5 +67,18 @@ def criar():
     usuarios[usuario.email] = usuario
 
     return redirect(url_for('index'));
+
+@app.route('/pesquisar_endereco', methods=['POST',])
+def pesquisar_endereco():
+    json = requests.get('https://viacep.com.br/ws/01001000/json/').json()
+
+    res = make_response(jsonify({'logradouro': json['logradouro'],
+                                 'bairro': json['bairro'],
+                                 'cidade': json['localidade'],
+                                 'estado': json['uf']}), 200)
+
+    return res
+
+
 
 app.run(debug=True)
