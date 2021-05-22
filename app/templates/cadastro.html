@@ -34,33 +34,19 @@
     <div class="col-md-4">
       <label for="inputEstado" class="form-label">Estado</label>
       <select name="estado" id="inputEstado" class="form-select">
-        {% for estado in estados %}
-          <option>{{ estado }}</option>
-        {% endfor %}
+        {% for indice, sigla in enumerate(estados) %}<option>{{ sigla }}</option> {% endfor %}
       </select>
     </div>
     <div class="col-md-2">
         <label for="inputCep" class="form-label">CEP</label>
-        <input name="cep" id="inputCep" type="text" class="form-control" oninput="if(document.getElementById('inputCep').value.length == 9) pesquisar_endereco()" maxlength="9" placeholder="00000-000">
+        <input name="cep" id="inputCep" type="text" class="form-control" oninput="if(document.getElementById('inputCep').value.length == 9) pesquisar_endereco(url)" maxlength="9" placeholder="00000-000">
     </div>
     <div class="col-12">
       <button type="submit" class="btn btn-primary mb-3">Confirmar</button>
     </div>
   </form>
 
-<script>
-  function pesquisar_endereco(){
-    fetch('{{ url_for('pesquisar_endereco') }}', {method: "POST"})
-      .then(function (response){
-      response.json().then(function (data) {
-        document.getElementById('inputLogradouro').value = data['logradouro']
-        document.getElementById('inputBairro').value = data['bairro']
-        document.getElementById('inputCidade').value = data['cidade']
-        document.getElementById('inputEstado').value = data['estado']
-      })
-    })
-  }
-      
-</script>
+<script language="JavaScript" src="{{ url_for('static', filename='js/cadastro.js') }}"></script>
+<script> url = '{{ url_for('pesquisar_endereco') }}' </script>
 
 {% endblock %}

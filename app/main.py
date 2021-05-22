@@ -51,7 +51,7 @@ def logout():
 def cadastro():
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima=url_for('cadastro')))
-    return render_template('cadastro.html', estados=estados, titulo='Cadastro Usuário')
+    return render_template('cadastro.html', estados=estados, titulo='Cadastro Usuário', enumerate=enumerate)
 
 @app.route('/criar', methods=['POST',])
 def criar():
@@ -70,12 +70,17 @@ def criar():
 
 @app.route('/pesquisar_endereco', methods=['POST',])
 def pesquisar_endereco():
-    json = requests.get('https://viacep.com.br/ws/01001000/json/').json()
+
+    content = request.json
+    cep = content['cep']
+    cep = cep.replace('-','')
+
+    json = requests.get('https://viacep.com.br/ws/'+ cep +'/json/').json()
 
     res = make_response(jsonify({'logradouro': json['logradouro'],
                                  'bairro': json['bairro'],
                                  'cidade': json['localidade'],
-                                 'estado': json['uf']}), 200)
+                                 'estado': json['uf'].upper()}), 200)
 
     return res
 
